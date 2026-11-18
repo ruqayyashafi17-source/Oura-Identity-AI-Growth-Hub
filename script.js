@@ -1,4 +1,3 @@
-
 document.getElementById('auditForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -16,3 +15,17 @@ document.getElementById('auditForm').addEventListener('submit', function(e) {
         <strong>3. Automation Workflow:</strong> n8n webhook triggered! Leads captured and synced to client database instantly.
     `;
 });
+
+// Copy Report Functionality
+const copyBtn = document.getElementById('copyBtn');
+if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+        const textToCopy = document.getElementById('resultText').innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            copyBtn.innerText = '✅ Report Copied Successfully!';
+            setTimeout(() => {
+                copyBtn.innerText = '📋 Copy Report to Clipboard';
+            }, 2500);
+        });
+    });
+}
