@@ -1,6 +1,5 @@
 document.getElementById('auditForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
     const name = document.getElementById('bizName').value;
     const goal = document.getElementById('bizGoal').value;
     const resultBox = document.getElementById('ai-result');
@@ -9,9 +8,9 @@ document.getElementById('auditForm').addEventListener('submit', function(e) {
     resultBox.style.display = 'block';
     resultText.innerHTML = `
         <strong>Target Brand:</strong> ${name}<br>
-        <strong>Focus Area:</strong> ${goal}<br><br>
-        <strong>1. Visual & Brand Audit:</strong> Establish a consistent dark/modern visual grid on Instagram & Facebook to build instant trust.<br>
-        <strong>2. Growth Action:</strong> Launch targeted Meta/Google campaigns paired with high-authority SEO backlinks.<br>
-        <strong>3. Automation Edge:</strong> Connect lead forms directly to an automated email/WhatsApp responder to convert inquiries within 60 seconds.
+        <strong>Selected Strategy:</strong> ${goal}<br><br>
+        <strong>1. Graphic & Visual Identity:</strong> High-impact social media assets deployed via automated design grids.<br>
+        <strong>2. Growth Execution:</strong> Multi-channel SEO backlink campaigns integrated with targeted Meta ad funnels.<br>
+        <strong>3. Automation Workflow:</strong> n8n webhook triggered! Leads captured and synced to client database instantly.
     `;
 });
