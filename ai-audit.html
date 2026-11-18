@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oura Identity | AI Audit Engine</title>
+    <title>Oura Identity | AI Audit & Growth Engine</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,8 +20,9 @@
     <section>
         <div class="section-title">
             <h2>Live AI Business Growth & Audit Engine</h2>
-            <p>Experience real-time automated digital marketing analysis built via JavaScript & AI workflows</p>
+            <p>Enterprise-grade automated digital marketing analysis built via JavaScript & AI webhooks</p>
         </div>
+
         <div class="audit-box">
             <form id="auditForm">
                 <div class="form-group">
@@ -29,7 +30,7 @@
                     <input type="text" id="bizName" placeholder="e.g., Karachi Fashion & Apparel" required>
                 </div>
                 <div class="form-group">
-                    <label>Primary Marketing Focus</label>
+                    <label>Primary Marketing Objective</label>
                     <select id="bizGoal">
                         <option value="Social Media Brand Awareness & Content">Social Media Brand Awareness & Content</option>
                         <option value="Google Ranking & SEO Backlink Growth">Google Ranking & SEO Backlink Growth</option>
@@ -40,15 +41,20 @@
                 <button type="submit" class="btn full-btn">Run Automated AI Strategy Generator</button>
             </form>
 
-            <div id="ai-result">
-                <h4>⚡ Oura Identity Automated Strategy Report:</h4>
-                <p id="resultText"></p>
+            <div id="ai-result" style="display: none; margin-top: 25px; padding: 25px; background: rgba(6, 182, 212, 0.08); border-left: 4px solid var(--accent-cyan); border-radius: 8px;">
+                <h4 style="color: var(--accent-cyan); margin-bottom: 12px; font-size: 1.2rem;">⚡ Oura Identity Automated Strategy Report:</h4>
+                <p id="resultText" style="color: #e2e8f0; line-height: 1.8; font-size: 0.95rem;"></p>
+                
+                <button type="button" id="copyBtn" class="btn" style="margin-top: 20px; background: #1e293b; border: 1px solid var(--accent-cyan); font-size: 0.9rem; padding: 10px 20px;">
+                    📋 Copy Report to Clipboard
+                </button>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Created by <span>Ruqayya Shafi</span> • AIPECT Institute Capstone Project</p>
+        <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
+        <p class="footer-sub">AIPECT Institute Capstone Project 2026</p>
     </footer>
 
     <script src="script.js"></script>
