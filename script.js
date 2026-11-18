@@ -1,5 +1,6 @@
 document.getElementById('auditForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    
     const name = document.getElementById('bizName').value;
     const goal = document.getElementById('bizGoal').value;
     const resultBox = document.getElementById('ai-result');
