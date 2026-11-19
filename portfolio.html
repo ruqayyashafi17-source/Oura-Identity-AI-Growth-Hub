@@ -3,8 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oura Identity | Portfolio & Agency Work</title>
+    <title>Oura Identity | Real Portfolio & Case Studies</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Interactive Case Study Modal Styling */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-box {
+            background: #0f172a;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            max-width: 650px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .close-modal:hover { color: var(--accent-cyan); }
+        .case-badge {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .case-list {
+            margin: 15px 0;
+            padding-left: 20px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+        .preview-img {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #1e293b;
+            display: none; /* Shows automatically when image file exists */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,60 +78,120 @@
 
     <section>
         <div class="section-title">
-            <h2>Our Agency Portfolio & Creative Works</h2>
-            <p>Showcasing enterprise-grade digital marketing campaigns, branding, and automation pipelines</p>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div style="text-align: center; margin-bottom: 40px;">
-            <button class="btn" style="padding: 10px 20px; margin: 5px; background: var(--card-bg); border: 1px solid var(--accent-cyan);">All Projects</button>
-            <button class="btn" style="padding: 10px 20px; margin: 5px; background: var(--card-bg); border: 1px solid #334155;">Brand Identity & Logos</button>
-            <button class="btn" style="padding: 10px 20px; margin: 5px; background: var(--card-bg); border: 1px solid #334155;">Social Media Ads</button>
-            <button class="btn" style="padding: 10px 20px; margin: 5px; background: var(--card-bg); border: 1px solid #334155;">AI & n8n Workflows</button>
+            <h2>Agency Portfolio & Real Case Studies</h2>
+            <p>Verified commercial branding, welfare campaigns, SEO operations, and live n8n automation systems</p>
         </div>
 
         <div class="grid">
+            <!-- Real Project 1 -->
             <div class="card">
-                <span class="card-tag">Branding & Logo Architecture</span>
-                <h3>Corporate Brand Identity System</h3>
-                <p>Complete vector-based logo design, typography styling, and brand guidelines created for modern startups.</p>
-                <div style="margin-top: 20px; padding: 10px; background: rgba(6, 182, 212, 0.05); border-radius: 6px; font-size: 0.85rem; color: var(--accent-cyan);">
-                    Status: Deployed & Verified ✓
-                </div>
+                <span class="card-tag">Brand Architecture & Identity</span>
+                <h3>🎨 Oura Identity & AIPECT 25th Anniversary</h3>
+                <p>Complete visual identity, vector logo systems, and official 25th-anniversary promotional campaign assets.</p>
+                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('branding')">
+                    View Design Case Study
+                </button>
             </div>
 
+            <!-- Real Project 2 -->
             <div class="card">
-                <span class="card-tag">Social Media Campaigns</span>
-                <h3>High-Conversion Ad Creatives</h3>
-                <p>Engaging commercial and welfare social media campaign graphics designed to maximize user engagement and CTR.</p>
-                <div style="margin-top: 20px; padding: 10px; background: rgba(6, 182, 212, 0.05); border-radius: 6px; font-size: 0.85rem; color: var(--accent-cyan);">
-                    Status: Optimized for Meta Ads ✓
-                </div>
+                <span class="card-tag">Social Media & SEO Operations</span>
+                <h3>📱 Pakistan Helpline Welfare Campaign</h3>
+                <p>High-impact Urdu social awareness creatives paired with multi-platform off-page SEO backlink pipelines.</p>
+                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('welfare')">
+                    View Campaign & SEO Metrics
+                </button>
             </div>
 
+            <!-- Real Project 3 -->
             <div class="card">
-                <span class="card-tag">SEO & Backlink Ecosystem</span>
-                <h3>High-DA Organic Ranking Pipeline</h3>
-                <p>Strategic off-page backlink campaigns and keyword optimization structures built for long-term search dominance.</p>
-                <div style="margin-top: 20px; padding: 10px; background: rgba(6, 182, 212, 0.05); border-radius: 6px; font-size: 0.85rem; color: var(--accent-cyan);">
-                    Status: Ranking Achieved ✓
-                </div>
-            </div>
-
-            <div class="card">
-                <span class="card-tag">AI Automation & Webhooks</span>
-                <h3>n8n B2B Lead Scraping Engine</h3>
-                <p>Automated data pipeline integrating Apify scrapers, Google Sheets, and instant AI-driven client outreach systems.</p>
-                <div style="margin-top: 20px; padding: 10px; background: rgba(6, 182, 212, 0.05); border-radius: 6px; font-size: 0.85rem; color: var(--accent-cyan);">
-                    Status: Active Webhook Flow ✓
-                </div>
+                <span class="card-tag">AI & n8n Workflow Engineering</span>
+                <h3>⚡ B2B Lead Scraper & AI Email Responder</h3>
+                <p>Automated LinkedIn lead extraction via Apify, Google Sheets CRM sync, and Gemini-powered client email responder.</p>
+                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('automation')">
+                    View Workflow Architecture
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Interactive Case Study Modal -->
+    <div class="modal-overlay" id="caseModal" onclick="closeModalOnBg(event)">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCaseStudy()">&times;</button>
+            <span class="case-badge" id="modalTag">Category</span>
+            <h3 id="modalTitle" style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">Project Title</h3>
+            <p id="modalDesc" style="color: #94a3b8; line-height: 1.6;"></p>
+            <ul class="case-list" id="modalPoints"></ul>
+            <img id="modalImg" class="preview-img" src="" alt="Project Preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+        </div>
+    </div>
 
     <footer>
         <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
         <p class="footer-sub">AIPECT Institute Capstone Project 2026</p>
     </footer>
+
+    <script>
+        const caseStudies = {
+            branding: {
+                tag: "Visual Branding & Logo Design",
+                title: "Oura Identity & AIPECT 25th Anniversary Assets",
+                desc: "Designed comprehensive vector brand systems and institutional promotional campaigns with strict typography and dark/gold aesthetic standards.",
+                points: [
+                    "<strong>Oura Identity Brand System:</strong> Custom logo, brand tagline ('Beyond Design, We Build Identities'), and official blog portal.",
+                    "<strong>AIPECT 25th Anniversary Campaign:</strong> High-resolution promotional social media posters and event branding assets.",
+                    "<strong>Tools Used:</strong> Adobe Illustrator, Photoshop, Canva Pro, and AI visual ideation."
+                ],
+                image: "images/branding-sample.jpg"
+            },
+            welfare: {
+                tag: "Social Media Campaigns & Off-Page SEO",
+                title: "Pakistan Helpline Welfare Association & SEO Growth",
+                desc: "Executed targeted Urdu social awareness graphics alongside high-authority backlink building to boost organic search visibility.",
+                points: [
+                    "<strong>Falahi Social Media Posts:</strong> Culturally resonant Urdu awareness creatives designed for maximum community engagement.",
+                    "<strong>Off-Page SEO Backlink Pipeline:</strong> Published indexed backlinks across Medium, Quora, Blogger, and pdp.com.pk.",
+                    "<strong>Result:</strong> Measurable improvement in domain authority and organic referral traffic."
+                ],
+                image: "images/welfare-campaign.jpg"
+            },
+            automation: {
+                tag: "n8n Automation & Gemini AI Pipelines",
+                title: "Automated B2B Lead Generation & AI Email Responder",
+                desc: "Built end-to-end no-code/low-code automation workflows eliminating manual lead research and client follow-ups.",
+                points: [
+                    "<strong>Karachi B2B Lead Engine:</strong> Integrated Apify LinkedIn scrapers with n8n to filter executive leads with verified emails directly into Google Sheets.",
+                    "<strong>AI Client Email Responder:</strong> Webhook-driven Gemini AI workflow that drafts personalized agency replies automatically.",
+                    "<strong>Live AI Audit Engine:</strong> Real-time strategy generator integrated directly into this agency portal."
+                ],
+                image: "images/n8n-workflow.png"
+            }
+        };
+
+        function openCaseStudy(key) {
+            const data = caseStudies[key];
+            document.getElementById('modalTag').innerText = data.tag;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDesc').innerText = data.desc;
+            
+            const list = document.getElementById('modalPoints');
+            list.innerHTML = data.points.map(item => `<li>${item}</li>`).join('');
+            
+            const img = document.getElementById('modalImg');
+            img.style.display = 'none';
+            img.src = data.image;
+
+            document.getElementById('caseModal').style.display = 'flex';
+        }
+
+        function closeCaseStudy() {
+            document.getElementById('caseModal').style.display = 'none';
+        }
+
+        function closeModalOnBg(e) {
+            if (e.target.id === 'caseModal') closeCaseStudy();
+        }
+    </script>
 </body>
 </html>
