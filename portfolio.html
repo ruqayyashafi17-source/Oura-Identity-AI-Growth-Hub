@@ -3,65 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oura Identity | Real Portfolio & Case Studies</title>
+    <title>Oura Identity | Real Portfolio — Logo & Mockup & Social Media Posts</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Interactive Case Study Modal Styling */
-        .modal-overlay {
+        .portfolio-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 25px 0 10px;
+        }
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-btn {
+            background: #0f172a;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 9px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-cyan, #06b6d4);
+            color: #020617;
+            border-color: var(--accent-cyan, #06b6d4);
+            font-weight: 600;
+        }
+        .search-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 9px 16px;
+            border-radius: 25px;
+            min-width: 240px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .search-box:focus {
+            border-color: var(--accent-cyan, #06b6d4);
+        }
+        .portfolio-category {
+            margin-top: 40px;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .category-header h3 {
+            color: var(--accent-cyan, #06b6d4);
+            font-size: 1.35rem;
+        }
+        .category-badge {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .work-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .work-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan, #06b6d4);
+            box-shadow: 0 10px 24px rgba(6, 182, 212, 0.14);
+        }
+        .work-card img {
+            width: 100%;
+            height: 225px;
+            object-fit: cover;
+            display: block;
+            background: #020617;
+        }
+        .work-info {
+            padding: 14px 16px;
+        }
+        .work-info h4 {
+            color: #f8fafc;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .work-info p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.88);
+            inset: 0;
+            background: rgba(2, 6, 23, 0.92);
             backdrop-filter: blur(6px);
-            z-index: 1000;
+            z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-        .modal-box {
+        .lightbox-content {
             background: #0f172a;
-            border: 1px solid var(--accent-cyan);
-            border-radius: 12px;
-            max-width: 650px;
+            border: 1px solid var(--accent-cyan, #06b6d4);
+            border-radius: 14px;
+            max-width: 760px;
             width: 100%;
-            padding: 30px;
+            padding: 22px;
             position: relative;
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.25);
+            text-align: center;
         }
-        .close-modal {
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 68vh;
+            object-fit: contain;
+            border-radius: 8px;
+            margin: 0 auto 14px;
+            display: block;
+            background: #020617;
+        }
+        .lightbox-close {
             position: absolute;
-            top: 15px; right: 20px;
-            font-size: 1.5rem;
-            color: #94a3b8;
-            cursor: pointer;
+            top: 12px;
+            right: 16px;
             background: none;
             border: none;
-        }
-        .close-modal:hover { color: var(--accent-cyan); }
-        .case-badge {
-            display: inline-block;
-            background: rgba(6, 182, 212, 0.12);
-            color: var(--accent-cyan);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
-        .case-list {
-            margin: 15px 0;
-            padding-left: 20px;
             color: #cbd5e1;
-            line-height: 1.8;
+            font-size: 1.7rem;
+            cursor: pointer;
         }
-        .preview-img {
-            width: 100%;
-            max-height: 260px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid #1e293b;
-            display: none; /* Shows automatically when image file exists */
+        .lightbox-close:hover {
+            color: var(--accent-cyan, #06b6d4);
         }
     </style>
 </head>
@@ -78,52 +172,479 @@
 
     <section>
         <div class="section-title">
-            <h2>Agency Portfolio & Real Case Studies</h2>
-            <p>Verified commercial branding, welfare campaigns, SEO operations, and live n8n automation systems</p>
+            <h2>Real Agency Portfolio</h2>
+            <p>Verified logos, brand mockups, and social media campaign creatives by Oura Identity Digital Brand Agency</p>
         </div>
 
-        <div class="grid">
-            <!-- Real Project 1 -->
-            <div class="card">
-                <span class="card-tag">Brand Architecture & Identity</span>
-                <h3>🎨 Oura Identity & AIPECT 25th Anniversary</h3>
-                <p>Complete visual identity, vector logo systems, and official 25th-anniversary promotional campaign assets.</p>
-                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('branding')">
-                    View Design Case Study
-                </button>
+        <div class="portfolio-controls">
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="filterCategory('all', this)">All Work (54)</button>
+                <button class="filter-btn" onclick="filterCategory('logo', this)">Logo &amp; Mockup (13)</button>
+                <button class="filter-btn" onclick="filterCategory('social', this)">Social Media Post (41)</button>
+            </div>
+            <input type="text" id="portfolioSearch" class="search-box" placeholder="Search logo, AIPECT, Oura, ads..." onkeyup="searchPortfolio()">
+        </div>
+
+        <!-- FOLDER 1: logo & mockup (13 Items) -->
+        <div class="portfolio-category" id="sec-logo" data-category="logo">
+            <div class="category-header">
+                <h3>🎨 Logo &amp; Mockup</h3>
+                <span class="category-badge">Folder: logo &amp; mockup • 13 Items</span>
             </div>
 
-            <!-- Real Project 2 -->
-            <div class="card">
-                <span class="card-tag">Social Media & SEO Operations</span>
-                <h3>📱 Pakistan Helpline Welfare Campaign</h3>
-                <p>High-impact Urdu social awareness creatives paired with multi-platform off-page SEO backlink pipelines.</p>
-                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('welfare')">
-                    View Campaign & SEO Metrics
-                </button>
+            <div class="gallery-grid">
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.10 AM_2.jpeg" alt="Interlocking Wave Emblem">
+                    <div class="work-info">
+                        <h4>Interlocking Wave Emblem</h4>
+                        <p>Minimalist navy &amp; silver brand mark</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.11 AM_2.jpeg" alt="Connected Network Identity">
+                    <div class="work-info">
+                        <h4>Connected Network Identity</h4>
+                        <p>Geometric tech &amp; data node mark</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.12 AM_2.jpeg" alt="Architectural Shield Wall Mockup">
+                    <div class="work-info">
+                        <h4>Architectural Shield Wall Mockup</h4>
+                        <p>Metallic gold emblem on dark matte surface</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.13 AM_2.jpeg" alt="Oura Identity Circular Emblem">
+                    <div class="work-info">
+                        <h4>Oura Identity Circular Emblem</h4>
+                        <p>Official agency badge in navy, cyan &amp; gold</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.14 AM (1)_2.jpeg" alt="Longi Enterprises Card Mockup">
+                    <div class="work-info">
+                        <h4>Longi Enterprises Card Mockup</h4>
+                        <p>Executive matte black stationery presentation</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.14 AM_2.jpeg" alt="Lucky One Mall Exterior Mockup">
+                    <div class="work-info">
+                        <h4>Lucky One Mall Exterior Mockup</h4>
+                        <p>Illuminated architectural signage presentation</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.15 AM (1)_2.jpeg" alt="Longi Enterprises Monogram">
+                    <div class="work-info">
+                        <h4>Longi Enterprises Monogram</h4>
+                        <p>Luxury purple &amp; silver typographic logo</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.15 AM_2.jpeg" alt="Longi Corporate Wall Mockup">
+                    <div class="work-info">
+                        <h4>Longi Corporate Wall Mockup</h4>
+                        <p>3D office branding &amp; interior signage</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.16 AM (1)_2.jpeg" alt="Lucky One Mall Bag Mockup">
+                    <div class="work-info">
+                        <h4>Lucky One Mall Bag Mockup</h4>
+                        <p>Retail packaging &amp; gold foil bag design</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.16 AM_2.jpeg" alt="Lucky One Mall Staff Uniform Mockup">
+                    <div class="work-info">
+                        <h4>Lucky One Mall Staff Uniform Mockup</h4>
+                        <p>Branded polo apparel &amp; retail team identity</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.19 AM.jpeg" alt="Noir Style Lounge Emblem Logo">
+                    <div class="work-info">
+                        <h4>Noir Style Lounge (NSL) Logo</h4>
+                        <p>Gold line-art salon &amp; lounge emblem</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.20 AM (1).jpeg" alt="Caffe Aura Interior Wall Mockup">
+                    <div class="work-info">
+                        <h4>Caffè Aura Interior Wall Mockup</h4>
+                        <p>Warm cafe branding &amp; wall signage mockup</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="logo &amp; mockup/WhatsApp Image 2026-11-19 at 1.41.20 AM.jpeg" alt="Caffe Aura Main Gold Logo">
+                    <div class="work-info">
+                        <h4>Caffè Aura Gold Logo</h4>
+                        <p>Luxury gold monogram &amp; tagline identity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOLDER 2: social media post (41 Items) -->
+        <div class="portfolio-category" id="sec-social" data-category="social">
+            <div class="category-header">
+                <h3>📱 Social Media Post</h3>
+                <span class="category-badge">Folder: social media post • 41 Items</span>
             </div>
 
-            <!-- Real Project 3 -->
-            <div class="card">
-                <span class="card-tag">AI & n8n Workflow Engineering</span>
-                <h3>⚡ B2B Lead Scraper & AI Email Responder</h3>
-                <p>Automated LinkedIn lead extraction via Apify, Google Sheets CRM sync, and Gemini-powered client email responder.</p>
-                <button class="btn" style="margin-top: 18px; padding: 10px 20px; font-size: 0.9rem;" onclick="openCaseStudy('automation')">
-                    View Workflow Architecture
-                </button>
+            <div class="gallery-grid">
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/156bf5d5-f99b-49d6-9485-2fc0ce11cafd_2.png" alt="Microsoft Access Essential">
+                    <div class="work-info">
+                        <h4>Microsoft Access Essential (Session 2026-27)</h4>
+                        <p>AIPECT International admission campaign post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/657290482_122114218215227980_2395964365997782298_n_2.jpg" alt="How to Choose the Perfect Logo">
+                    <div class="work-info">
+                        <h4>How to Choose the Perfect Logo</h4>
+                        <p>Oura Identity brand guide &amp; laptop mockup post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/657685669_122115114363227980_137601799557767932_n_2.jpg" alt="Digital Presence and Brand Identity">
+                    <div class="work-info">
+                        <h4>Digital Presence &amp; Brand Identity</h4>
+                        <p>Oura Identity services &amp; stationery showcase</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/658925503_122115097419227980_114960834572605298_n_2.jpg" alt="Full-Service Digital Growth">
+                    <div class="work-info">
+                        <h4>Full-Service Digital Growth</h4>
+                        <p>Logo, SEO, Google &amp; Meta ads promotional post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/703862412_122120961579227980_4571057557579795850_n_2.jpg" alt="Eid-Ul-Adha Visiting Cards Offer">
+                    <div class="work-info">
+                        <h4>Eid-Ul-Adha Visiting Cards Offer</h4>
+                        <p>Seasonal promotional design for Oura Identity</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/704899430_122120803725227980_2740632146907270663_n_2.jpg" alt="Blessed Friday Jumma Mubarak">
+                    <div class="work-info">
+                        <h4>Blessed Friday (Jumma Mubarak)</h4>
+                        <p>Gold &amp; navy greeting post for brand engagement</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/718964958_17877656838656406_8340785856533920776_n_2.webp" alt="AIPECT 25 Years of Excellence">
+                    <div class="work-info">
+                        <h4>AIPECT 25 Years of Excellence</h4>
+                        <p>Silver/Gold jubilee campaign in digital education</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/739155814_122125054563227980_7774168605182124886_n_2.jpg" alt="Run Ads Reach More Grow Faster">
+                    <div class="work-info">
+                        <h4>Paid Ads &amp; Lead Growth</h4>
+                        <p>Facebook, Instagram &amp; Google Ads campaign post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/740712709_122125449993227980_5683003228911223514_n_2.jpg" alt="Let's Fun with VR Glasses 14 August">
+                    <div class="work-info">
+                        <h4>Let's Fun with VR Glasses (14 August)</h4>
+                        <p>Interactive VR event post for AIPECT International</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/749042001_122126493753227980_4777488592267018021_n_2.jpg" alt="Jumma Mubarak Calligraphy Post">
+                    <div class="work-info">
+                        <h4>Jumma Mubarak &amp; Hadith Post</h4>
+                        <p>Islamic greeting &amp; community engagement creative</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/770609205_122130193095227980_4299482282443335992_n.jpg" alt="14th August Happy Independence Day">
+                    <div class="work-info">
+                        <h4>14th August Independence Day</h4>
+                        <p>Quaid-e-Azam &amp; Urdu national message design</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/770919122_122129658321227980_4967449177436754660_n.jpg" alt="14th August Azadi Mubarak Special Offer">
+                    <div class="work-info">
+                        <h4>14th August 50% Off Special Offer</h4>
+                        <p>Independence Day agency services promotion</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/772943862_122130193215227980_7808373793128600433_n.jpg" alt="Jumma Mubarak aur Yaum-e-Azadi Mubarak">
+                    <div class="work-info">
+                        <h4>Jumma Mubarak &amp; Yaum-e-Azadi</h4>
+                        <p>Urdu calligraphy, prayer &amp; national greeting</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 15, 2026, 10_23_57 AM.png" alt="Unity Certified User Artist">
+                    <div class="work-info">
+                        <h4>Unity Certified User Artist</h4>
+                        <p>3D modeling, texturing &amp; lighting course post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 15, 2026, 11_11_05 AM.png" alt="Intuit Personal Finance">
+                    <div class="work-info">
+                        <h4>Intuit Personal Finance</h4>
+                        <p>Admission Open Session 2026-27 promotional post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 01_51_33 AM.png" alt="Intuit Certified Bookkeeping Professional">
+                    <div class="work-info">
+                        <h4>Intuit Certified Bookkeeping Professional</h4>
+                        <p>Finance &amp; bookkeeping admission campaign creative</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 02_18_52 AM.png" alt="IT Specialist Software Development">
+                    <div class="work-info">
+                        <h4>IT Specialist | Software Development</h4>
+                        <p>Code Your Future admission post for AIPECT</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 02_27_42 AM.png" alt="IT Specialist Networking">
+                    <div class="work-info">
+                        <h4>IT Specialist | Networking</h4>
+                        <p>Routing, switching &amp; network security post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 03_29_35 AM.png" alt="Unity Certified User Programmer">
+                    <div class="work-info">
+                        <h4>Unity Certified User Programmer</h4>
+                        <p>Programming &amp; game dev campaign with Urdu line</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 05_12_48 AM.png" alt="Information Technology CIT">
+                    <div class="work-info">
+                        <h4>Information Technology (CIT)</h4>
+                        <p>Certificate in Information Technology course post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 05_35_35 AM.png" alt="Textile Designing 2nd Semester">
+                    <div class="work-info">
+                        <h4>Textile Designing — 2nd Semester</h4>
+                        <p>Illustrator, Photoshop, InDesign &amp; CorelDRAW post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 05_36_38 AM.png" alt="Textile Designing 1st Semester">
+                    <div class="work-info">
+                        <h4>Textile Designing — 1st Semester</h4>
+                        <p>Fashion &amp; textile print design admission post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 05_44_11 AM.png" alt="Networking Connecting Today Powering Tomorrow">
+                    <div class="work-info">
+                        <h4>Networking — Connecting Today</h4>
+                        <p>Enterprise network infrastructure promotional post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 06_07_54 AM.png" alt="IT Specialist Networking Build Connect Secure">
+                    <div class="work-info">
+                        <h4>IT Networking — Build | Connect | Secure</h4>
+                        <p>Session 2026-27 networking specialist creative</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 06_24_10 AM.png" alt="Unity Certified User Programmer C Sharp">
+                    <div class="work-info">
+                        <h4>Unity Programmer (C# &amp; Game Dev)</h4>
+                        <p>Interactive 3D worlds &amp; Unity engine post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 10_19_26 AM.png" alt="Medical Administrative Assistant">
+                    <div class="work-info">
+                        <h4>Medical Administrative Assistant</h4>
+                        <p>Health Sciences careers admission post (2026-2027)</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 10_44_44 AM.png" alt="Meta Certified Digital Marketing Associate">
+                    <div class="work-info">
+                        <h4>Meta Certified Digital Marketing Associate</h4>
+                        <p>SEO, social media, email &amp; ads campaign post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 10_58_12 AM.png" alt="Intuit Design for Delight Innovator">
+                    <div class="work-info">
+                        <h4>Intuit Design for Delight Innovator</h4>
+                        <p>Human-centered design &amp; prototyping post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 11_15_06 AM.png" alt="Intuit QuickBooks Certified User QBCU">
+                    <div class="work-info">
+                        <h4>Intuit QuickBooks Certified User (QBCU)</h4>
+                        <p>Accounting &amp; QuickBooks certification post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 11_37_35 AM.png" alt="IT Specialist JavaScript Pedestal">
+                    <div class="work-info">
+                        <h4>IT Specialist | JavaScript (JS Edition)</h4>
+                        <p>Modern ES6+, DOM &amp; frontend web dev post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 16, 2026, 11_43_33 AM.png" alt="IT Specialist JavaScript Code Today">
+                    <div class="work-info">
+                        <h4>IT Specialist | JavaScript (Code Today)</h4>
+                        <p>Interactive web applications admission creative</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/ChatGPT Image Jul 18, 2026, 08_43_40 AM.png" alt="IT Specialist Device Configuration and Management">
+                    <div class="work-info">
+                        <h4>IT Specialist | Device Configuration</h4>
+                        <p>Device deployment, monitoring &amp; security post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260720_021811.png" alt="Agriscience and Technology Careers">
+                    <div class="work-info">
+                        <h4>Agriscience &amp; Technology Careers</h4>
+                        <p>Modern farming, ag-tech &amp; STEM course post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260720_023103.png" alt="Adobe Premiere Pro Admission Open">
+                    <div class="work-info">
+                        <h4>Adobe Premiere Pro (Neon Studio)</h4>
+                        <p>Video editing course admission post (2026-27)</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260720_023845.png" alt="Adobe Premiere Pro Enroll Now">
+                    <div class="work-info">
+                        <h4>Adobe Premiere Pro (Enroll Now)</h4>
+                        <p>Session 2026-27 video editing campaign post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260721_060127.png" alt="Content Creation and Marketing Adobe Express">
+                    <div class="work-info">
+                        <h4>Content Creation &amp; Marketing</h4>
+                        <p>Adobe Express &amp; multi-channel social post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260721_062607.png" alt="Certified Frontend Developer">
+                    <div class="work-info">
+                        <h4>Certified Frontend Developer</h4>
+                        <p>HTML5, CSS3 &amp; responsive web dev post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Copilot_20260721_063212.png" alt="Certified Backend Developer">
+                    <div class="work-info">
+                        <h4>Certified Backend Developer</h4>
+                        <p>Node.js, databases &amp; APIs admission post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/WhatsApp Image 2026-10-22 at 10.20.19 AM.jpeg" alt="Pakistan Helpline Welfare Association">
+                    <div class="work-info">
+                        <h4>Pakistan Helpline Welfare Campaign</h4>
+                        <p>Urdu falahi awareness &amp; community support post</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/WhatsApp Image 2026-11-19 at 1.41.21 AM.jpeg" alt="3rd Happy Birthday Muhammad Mawia">
+                    <div class="work-info">
+                        <h4>3rd Birthday Celebration Graphic</h4>
+                        <p>Custom celebratory event design for Muhammad Mawia</p>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="openLightbox(this)">
+                    <img src="social media post/Jul 21, 2026, 11_05_11 AM.png" alt="Generative AI Admission Open">
+                    <div class="work-info">
+                        <h4>Generative AI (Learn Today, Build Tomorrow)</h4>
+                        <p>AI automation &amp; content course post for AIPECT</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Case Study Modal -->
-    <div class="modal-overlay" id="caseModal" onclick="closeModalOnBg(event)">
-        <div class="modal-box">
-            <button class="close-modal" onclick="closeCaseStudy()">&times;</button>
-            <span class="case-badge" id="modalTag">Category</span>
-            <h3 id="modalTitle" style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">Project Title</h3>
-            <p id="modalDesc" style="color: #94a3b8; line-height: 1.6;"></p>
-            <ul class="case-list" id="modalPoints"></ul>
-            <img id="modalImg" class="preview-img" src="" alt="Project Preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+    <!-- Image Zoom Lightbox -->
+    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightboxBg(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightboxImg" src="" alt="Preview">
+            <h4 id="lightboxTitle" style="color: #f8fafc; font-size: 1.15rem; margin-bottom: 4px;"></h4>
+            <p id="lightboxDesc" style="color: #94a3b8; font-size: 0.9rem;"></p>
         </div>
     </div>
 
@@ -133,64 +654,51 @@
     </footer>
 
     <script>
-        const caseStudies = {
-            branding: {
-                tag: "Visual Branding & Logo Design",
-                title: "Oura Identity & AIPECT 25th Anniversary Assets",
-                desc: "Designed comprehensive vector brand systems and institutional promotional campaigns with strict typography and dark/gold aesthetic standards.",
-                points: [
-                    "<strong>Oura Identity Brand System:</strong> Custom logo, brand tagline ('Beyond Design, We Build Identities'), and official blog portal.",
-                    "<strong>AIPECT 25th Anniversary Campaign:</strong> High-resolution promotional social media posters and event branding assets.",
-                    "<strong>Tools Used:</strong> Adobe Illustrator, Photoshop, Canva Pro, and AI visual ideation."
-                ],
-                image: "images/branding-sample.jpg"
-            },
-            welfare: {
-                tag: "Social Media Campaigns & Off-Page SEO",
-                title: "Pakistan Helpline Welfare Association & SEO Growth",
-                desc: "Executed targeted Urdu social awareness graphics alongside high-authority backlink building to boost organic search visibility.",
-                points: [
-                    "<strong>Falahi Social Media Posts:</strong> Culturally resonant Urdu awareness creatives designed for maximum community engagement.",
-                    "<strong>Off-Page SEO Backlink Pipeline:</strong> Published indexed backlinks across Medium, Quora, Blogger, and pdp.com.pk.",
-                    "<strong>Result:</strong> Measurable improvement in domain authority and organic referral traffic."
-                ],
-                image: "images/welfare-campaign.jpg"
-            },
-            automation: {
-                tag: "n8n Automation & Gemini AI Pipelines",
-                title: "Automated B2B Lead Generation & AI Email Responder",
-                desc: "Built end-to-end no-code/low-code automation workflows eliminating manual lead research and client follow-ups.",
-                points: [
-                    "<strong>Karachi B2B Lead Engine:</strong> Integrated Apify LinkedIn scrapers with n8n to filter executive leads with verified emails directly into Google Sheets.",
-                    "<strong>AI Client Email Responder:</strong> Webhook-driven Gemini AI workflow that drafts personalized agency replies automatically.",
-                    "<strong>Live AI Audit Engine:</strong> Real-time strategy generator integrated directly into this agency portal."
-                ],
-                image: "images/n8n-workflow.png"
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const logoSec = document.getElementById('sec-logo');
+            const socialSec = document.getElementById('sec-social');
+
+            if (category === 'all') {
+                logoSec.style.display = 'block';
+                socialSec.style.display = 'block';
+            } else if (category === 'logo') {
+                logoSec.style.display = 'block';
+                socialSec.style.display = 'none';
+            } else if (category === 'social') {
+                logoSec.style.display = 'none';
+                socialSec.style.display = 'block';
             }
-        };
-
-        function openCaseStudy(key) {
-            const data = caseStudies[key];
-            document.getElementById('modalTag').innerText = data.tag;
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalDesc').innerText = data.desc;
-            
-            const list = document.getElementById('modalPoints');
-            list.innerHTML = data.points.map(item => `<li>${item}</li>`).join('');
-            
-            const img = document.getElementById('modalImg');
-            img.style.display = 'none';
-            img.src = data.image;
-
-            document.getElementById('caseModal').style.display = 'flex';
+            searchPortfolio();
         }
 
-        function closeCaseStudy() {
-            document.getElementById('caseModal').style.display = 'none';
+        function searchPortfolio() {
+            const query = document.getElementById('portfolioSearch').value.toLowerCase().trim();
+            document.querySelectorAll('.work-card').forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
         }
 
-        function closeModalOnBg(e) {
-            if (e.target.id === 'caseModal') closeCaseStudy();
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            const title = card.querySelector('h4').innerText;
+            const desc = card.querySelector('p').innerText;
+
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        function closeLightboxBg(e) {
+            if (e.target.id === 'lightboxModal') closeLightbox();
         }
     </script>
 </body>
