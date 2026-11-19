@@ -11,7 +11,7 @@ document.getElementById('auditForm').addEventListener('submit', async function(e
     resultText.innerHTML = `🔄 Connecting to Oura Identity AI Engine & n8n Webhook... Please wait.`;
 
     // Apna n8n Webhook URL yahan dalein
-    const n8nWebhookURL = 'YAHAN_APNA_N8N_WEBHOOK_URL_PASTE_KAREIN';
+    const n8nWebhookURL = 'http://localhost:5678/webhook-test/oura-audit';
 
     try {
         const response = await fetch(n8nWebhookURL, {
