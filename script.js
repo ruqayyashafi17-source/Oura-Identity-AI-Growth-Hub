@@ -10,7 +10,7 @@ document.getElementById('auditForm').addEventListener('submit', async function(e
     resultBox.style.display = 'block';
     resultText.innerHTML = `🔄 Connecting to Oura Identity AI Engine & n8n Webhook... Please wait.`;
 
-    // Apna n8n Webhook URL yahan dalein
+    // Production URL use karein jab workflow Active ho (ya test ke waqt webhook-test)
     const n8nWebhookURL = 'http://localhost:5678/webhook-test/oura-audit';
 
     try {
@@ -26,25 +26,25 @@ document.getElementById('auditForm').addEventListener('submit', async function(e
             })
         });
 
+        if (!response.ok) {
+            throw new Error(`Server Error: ${response.status}`);
+        }
+
         const data = await response.json();
 
-        // Display real response received from n8n / Gemini AI
+        // Display 100% real response received from n8n / Gemini AI
         resultText.innerHTML = `
             <strong>🏢 Target Enterprise:</strong> <span style="color: var(--accent-cyan);">${name}</span><br>
             <strong>🎯 Selected Objective:</strong> ${goal}<br><br>
             <strong>🤖 Live AI Generated Strategy (via n8n & Gemini):</strong><br>
-            ${data.strategyReport || data.message || "Audit completed successfully and synced to database."}
+            ${data.strategyReport}
         `;
 
     } catch (error) {
-        // Fallback / Emergency safety block if n8n server is offline during presentation
+        // Real error message (no dummy text)
         resultText.innerHTML = `
-            <strong>🏢 Target Enterprise:</strong> <span style="color: var(--accent-cyan);">${name}</span><br>
-            <strong>🎯 Selected Objective:</strong> ${goal}<br><br>
-            <strong>⚡ Live Automation Report:</strong><br>
-            1. Visual branding & high-conversion social assets deployed for ${name}.<br>
-            2. Multi-channel SEO backlink pipeline integrated.<br>
-            3. n8n Webhook triggered successfully. Data logged into Google Sheets database! ✓
+            <span style="color: #ef4444;">⚠️ <strong>Connection Error:</strong> Real AI response receive nahi hua (${error.message}).</span><br>
+            <small style="color: #94a3b8;">Check karein ke n8n mein 'Execute Workflow' on hai aur Gemini node mein koi error nahi hai.</small>
         `;
     }
 });
