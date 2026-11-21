@@ -6,6 +6,26 @@
     <title>Oura Identity | Real Portfolio — Logo, Mockup, Posts, AI & SEO</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Highlighted Skill Tag */
+        .skill-highlight {
+            color: #020617;
+            background: var(--accent-cyan, #06b6d4);
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            display: inline-block;
+        }
+        .skill-highlight-soft {
+            color: var(--accent-cyan, #06b6d4);
+            background: rgba(6, 182, 212, 0.14);
+            border: 1px solid rgba(6, 182, 212, 0.45);
+            font-weight: 600;
+            padding: 1px 7px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
         /* Highlights Strip for Judges / Clients */
         .highlights-strip {
             display: grid;
@@ -28,7 +48,7 @@
         .highlight-box p {
             color: #cbd5e1;
             font-size: 0.85rem;
-            line-height: 1.45;
+            line-height: 1.5;
         }
 
         .portfolio-controls {
@@ -208,18 +228,18 @@
     <section>
         <div class="section-title">
             <h2>Real Agency Portfolio</h2>
-            <p>Brand Identity, Content Writing, Social Media Management, Paid Ads, SEO &amp; AI Automation by Oura Identity</p>
+            <p>Brand Identity, Content Writing, <span class="skill-highlight-soft">Social Media Management</span>, Paid Ads, SEO &amp; AI Automation by Oura Identity</p>
         </div>
 
-        <!-- Digital Marketing & AI Automation Highlights (Without Website Design) -->
+        <!-- Digital Marketing & AI Automation Highlights -->
         <div class="highlights-strip">
             <div class="highlight-box">
                 <h4>Brand &amp; Copy Identity</h4>
                 <p>19+ Logos &amp; Mockups, Brand Naming, Slogans &amp; Content Writing</p>
             </div>
             <div class="highlight-box">
-                <h4>SMM &amp; Paid Ads</h4>
-                <p>24+ Posts &amp; Videos, Social Media Management, Meta &amp; Google Ads</p>
+                <h4><span class="skill-highlight">Social Media Management</span> &amp; Ads</h4>
+                <p><span class="skill-highlight-soft">Social Media Management</span>, 24+ Posts &amp; Videos, Meta &amp; Google Ads</p>
             </div>
             <div class="highlight-box">
                 <h4>Local &amp; Off-Page SEO</h4>
@@ -235,10 +255,10 @@
             <div class="filter-tabs">
                 <button class="filter-btn active" onclick="filterCategory('all', this)">All Work</button>
                 <button class="filter-btn" onclick="filterCategory('logo', this)">Logo &amp; Mockup (19)</button>
-                <button class="filter-btn" onclick="filterCategory('social', this)">Social Media &amp; Ads</button>
-                <button class="filter-btn" onclick="filterCategory('automation-seo', this)">AI Automation &amp; SEO</button>
+                <button class="filter-btn" onclick="filterCategory('social', this)">Social Media Management &amp; Ads</button>
+                <button class="filter-btn" onclick="filterCategory('automation-seo', this)">SMM, AI Automation &amp; SEO</button>
             </div>
-            <input type="text" id="portfolioSearch" class="search-box" placeholder="Search logo, mockup, post, SEO, AI..." onkeyup="searchPortfolio()">
+            <input type="text" id="portfolioSearch" class="search-box" placeholder="Search logo, mockup, post, SMM, SEO, AI..." onkeyup="searchPortfolio()">
         </div>
 
         <!-- SECTION 1: Logo & Mockup (19 Items) -->
@@ -403,11 +423,11 @@
             </div>
         </div>
 
-        <!-- SECTION 2: Social Media Post & Ads Management -->
+        <!-- SECTION 2: Social Media Management & Campaign Creatives -->
         <div class="portfolio-category" id="sec-social" data-category="social">
             <div class="category-header">
-                <h3>📱 Social Media Management &amp; Campaign Creatives</h3>
-                <span class="category-badge">Content Creation, Page Management &amp; Paid Ads</span>
+                <h3>📱 <span class="skill-highlight">Social Media Management</span> &amp; Campaign Creatives</h3>
+                <span class="category-badge">Social Media Management, Content Creation &amp; Paid Ads</span>
             </div>
 
             <div class="gallery-grid">
@@ -605,14 +625,30 @@
             </div>
         </div>
 
-        <!-- SECTION 3: AI Automation & Backlink SEO -->
+        <!-- SECTION 3: Social Media Management, AI Automation & Backlink SEO -->
         <div class="portfolio-category" id="sec-automation-seo" data-category="automation-seo">
             <div class="category-header">
-                <h3>⚡ AI Automation &amp; Backlink SEO</h3>
-                <span class="category-badge">Live Workflows, Local &amp; Off-Page SEO • Verified Work</span>
+                <h3>⚡ <span class="skill-highlight">Social Media Management</span>, AI Automation &amp; Backlink SEO</h3>
+                <span class="category-badge">Live Channels, Workflows, Local &amp; Off-Page SEO • Verified Work</span>
             </div>
 
             <div class="gallery-grid">
+                <div class="work-card" onclick="window.open('https://www.facebook.com/share/19xhD7Yytc/', '_blank')">
+                    <div class="work-info">
+                        <h4><span class="skill-highlight-soft">Social Media Management</span> — Facebook</h4>
+                        <p>Oura Identity official page • 21 followers &amp; 30+ published posts</p>
+                        <span class="link-pill">Open Facebook Page ↗</span>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="window.open('https://www.instagram.com/ouraidentity?lqvp=aTFpZm05eTFlcnkz', '_blank')">
+                    <div class="work-info">
+                        <h4><span class="skill-highlight-soft">Social Media Management</span> — Instagram</h4>
+                        <p>@ouraidentity brand feed, visual grid &amp; audience presence</p>
+                        <span class="link-pill">Open Instagram Profile ↗</span>
+                    </div>
+                </div>
+
                 <div class="work-card" onclick="openLightbox(this)">
                     <img src="gbp-profile.png" alt="Oura Identity Google Business Profile">
                     <div class="work-info">
@@ -710,67 +746,3 @@
             }
             searchPortfolio();
         }
-
-        function searchPortfolio() {
-            const query = document.getElementById('portfolioSearch').value.toLowerCase().trim();
-            document.querySelectorAll('.work-card').forEach(card => {
-                if (card.dataset.missing === "true") {
-                    return;
-                }
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(query) ? 'block' : 'none';
-            });
-        }
-
-        function openLightbox(card) {
-            const img = card.querySelector('img');
-            if (!img) {
-                return;
-            }
-            const title = card.querySelector('h4').innerText;
-            const desc = card.querySelector('p').innerText;
-
-            document.getElementById('lightboxImg').src = img.src;
-            document.getElementById('lightboxTitle').innerText = title;
-            document.getElementById('lightboxDesc').innerText = desc;
-            document.getElementById('lightboxModal').style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightboxModal').style.display = 'none';
-        }
-
-        function closeLightboxBg(e) {
-            if (e.target.id === 'lightboxModal') {
-                closeLightbox();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".work-card img").forEach(function (img) {
-                const rawSrc = img.getAttribute("src");
-                const candidates = [
-                    rawSrc,
-                    encodeURIComponent(rawSrc)
-                ].filter((v, i, a) => a.indexOf(v) === i);
-
-                let idx = 0;
-                img.src = candidates[idx];
-
-                img.onerror = function () {
-                    idx++;
-                    if (idx < candidates.length) {
-                        this.src = candidates[idx];
-                    } else {
-                        const card = this.closest(".work-card");
-                        if (card) {
-                            card.dataset.missing = "true";
-                            card.style.display = "none";
-                        }
-                    }
-                };
-            });
-        });
-    </script>
-</body>
-</html>
