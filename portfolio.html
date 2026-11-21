@@ -6,6 +6,31 @@
     <title>Oura Identity | Real Portfolio — Logo, Mockup, Posts, AI & SEO</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Highlights Strip for Judges / Clients */
+        .highlights-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 25px 0 30px;
+        }
+        .highlight-box {
+            background: linear-gradient(145deg, #0f172a, #020617);
+            border: 1px solid #1e293b;
+            border-left: 3px solid var(--accent-cyan, #06b6d4);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+        .highlight-box h4 {
+            color: var(--accent-cyan, #06b6d4);
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+        }
+        .highlight-box p {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
         .portfolio-controls {
             display: flex;
             flex-wrap: wrap;
@@ -183,14 +208,34 @@
     <section>
         <div class="section-title">
             <h2>Real Agency Portfolio</h2>
-            <p>Verified logos, brand mockups, social media creatives, AI automation &amp; backlink SEO by Oura Identity</p>
+            <p>Brand Identity, Content Writing, Social Media Management, Paid Ads, SEO &amp; AI Automation by Oura Identity</p>
+        </div>
+
+        <!-- Digital Marketing & AI Automation Highlights (Without Website Design) -->
+        <div class="highlights-strip">
+            <div class="highlight-box">
+                <h4>Brand &amp; Copy Identity</h4>
+                <p>19+ Logos &amp; Mockups, Brand Naming, Slogans &amp; Content Writing</p>
+            </div>
+            <div class="highlight-box">
+                <h4>SMM &amp; Paid Ads</h4>
+                <p>24+ Posts &amp; Videos, Social Media Management, Meta &amp; Google Ads</p>
+            </div>
+            <div class="highlight-box">
+                <h4>Local &amp; Off-Page SEO</h4>
+                <p>Verified Google Business Profile (309+ Views) &amp; 4 Live Backlink Channels</p>
+            </div>
+            <div class="highlight-box">
+                <h4>AI &amp; n8n Automation</h4>
+                <p>Media Production OS, Lead Generation Pipelines &amp; Automated Client Workflows</p>
+            </div>
         </div>
 
         <div class="portfolio-controls">
             <div class="filter-tabs">
                 <button class="filter-btn active" onclick="filterCategory('all', this)">All Work</button>
                 <button class="filter-btn" onclick="filterCategory('logo', this)">Logo &amp; Mockup (19)</button>
-                <button class="filter-btn" onclick="filterCategory('social', this)">Social Media Post</button>
+                <button class="filter-btn" onclick="filterCategory('social', this)">Social Media &amp; Ads</button>
                 <button class="filter-btn" onclick="filterCategory('automation-seo', this)">AI Automation &amp; SEO</button>
             </div>
             <input type="text" id="portfolioSearch" class="search-box" placeholder="Search logo, mockup, post, SEO, AI..." onkeyup="searchPortfolio()">
@@ -358,11 +403,11 @@
             </div>
         </div>
 
-        <!-- SECTION 2: Social Media Post -->
+        <!-- SECTION 2: Social Media Post & Ads Management -->
         <div class="portfolio-category" id="sec-social" data-category="social">
             <div class="category-header">
-                <h3>📱 Social Media Post</h3>
-                <span class="category-badge">Campaign &amp; Brand Creatives</span>
+                <h3>📱 Social Media Management &amp; Campaign Creatives</h3>
+                <span class="category-badge">Content Creation, Page Management &amp; Paid Ads</span>
             </div>
 
             <div class="gallery-grid">
@@ -669,7 +714,9 @@
         function searchPortfolio() {
             const query = document.getElementById('portfolioSearch').value.toLowerCase().trim();
             document.querySelectorAll('.work-card').forEach(card => {
-                if (card.dataset.missing === "true") return;
+                if (card.dataset.missing === "true") {
+                    return;
+                }
                 const text = card.innerText.toLowerCase();
                 card.style.display = text.includes(query) ? 'block' : 'none';
             });
@@ -677,7 +724,9 @@
 
         function openLightbox(card) {
             const img = card.querySelector('img');
-            if (!img) return;
+            if (!img) {
+                return;
+            }
             const title = card.querySelector('h4').innerText;
             const desc = card.querySelector('p').innerText;
 
@@ -692,7 +741,9 @@
         }
 
         function closeLightboxBg(e) {
-            if (e.target.id === 'lightboxModal') closeLightbox();
+            if (e.target.id === 'lightboxModal') {
+                closeLightbox();
+            }
         }
 
         document.addEventListener("DOMContentLoaded", function () {
