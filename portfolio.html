@@ -631,7 +631,6 @@
 
     <footer>
         <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
-        <p class="footer-sub">AIPECT Institute Capstone Project 2026</p>
         <p class="footer-sub" style="margin-top: 8px;">
             <a href="https://www.facebook.com/share/19xhD7Yytc/" target="_blank" style="color: var(--accent-cyan, #06b6d4); text-decoration: none; margin: 0 8px;">Facebook</a> •
             <a href="https://www.instagram.com/ouraidentity?lqvp=aTFpZm05eTFlcnkz" target="_blank" style="color: var(--accent-cyan, #06b6d4); text-decoration: none; margin: 0 8px;">Instagram</a>
@@ -693,34 +692,3 @@
         }
 
         function closeLightboxBg(e) {
-            if (e.target.id === 'lightboxModal') closeLightbox();
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".work-card img").forEach(function (img) {
-                const rawSrc = img.getAttribute("src");
-                const candidates = [
-                    rawSrc,
-                    encodeURIComponent(rawSrc)
-                ].filter((v, i, a) => a.indexOf(v) === i);
-
-                let idx = 0;
-                img.src = candidates[idx];
-
-                img.onerror = function () {
-                    idx++;
-                    if (idx < candidates.length) {
-                        this.src = candidates[idx];
-                    } else {
-                        const card = this.closest(".work-card");
-                        if (card) {
-                            card.dataset.missing = "true";
-                            card.style.display = "none";
-                        }
-                    }
-                };
-            });
-        });
-    </script>
-</body>
-</html>
