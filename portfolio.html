@@ -587,4 +587,140 @@
                 <div class="work-card" onclick="window.open('https://pdp.com.pk/ngos/pakistan-helpline-welfare-association', '_blank')">
                     <div class="work-info">
                         <h4>Off-Page SEO — NGO Directory Profile</h4>
-                        <p>Target: pakistanhelpline.com • Directory backlink on pdp.com.pk</p
+                        <p>Target: pakistanhelpline.com • Directory backlink on pdp.com.pk</p>
+                        <span class="link-pill">View Directory Link ↗</span>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="window.open('https://qr.ae/pFlClk', '_blank')">
+                    <div class="work-info">
+                        <h4>Off-Page SEO — Quora Authority Post</h4>
+                        <p>Target: pakistanhelpline.com • High-authority Q&amp;A backlink</p>
+                        <span class="link-pill">View Quora Post ↗</span>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="window.open('https://medium.com/@ruqayyashafi17/pakistan-helpline-emergency-relief-welfare-social-support-services-e5a819a2bf3e?sharedUserId=ruqayyashafi17', '_blank')">
+                    <div class="work-info">
+                        <h4>Off-Page SEO — Medium Web 2.0 Article</h4>
+                        <p>Target: pakistanhelpline.com • Short link: bit.ly/47xbVxz</p>
+                        <span class="link-pill">Read Medium Article ↗</span>
+                    </div>
+                </div>
+
+                <div class="work-card" onclick="window.open('https://ouraidentitybrand.blogspot.com/2026/10/pakistan-helpline-supporting-welfare.html', '_blank')">
+                    <div class="work-info">
+                        <h4>Off-Page SEO — Blogger Welfare Article</h4>
+                        <p>Target: pakistanhelpline.com • Short link: bit.ly/4iwMNwY</p>
+                        <span class="link-pill">Read Blogger Post ↗</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Zoom Lightbox -->
+    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightboxBg(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightboxImg" src="" alt="Preview">
+            <h4 id="lightboxTitle" style="color: #f8fafc; font-size: 1.15rem; margin-bottom: 4px;"></h4>
+            <p id="lightboxDesc" style="color: #94a3b8; font-size: 0.9rem;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
+        <p class="footer-sub">AIPECT Institute Capstone Project 2026</p>
+        <p class="footer-sub" style="margin-top: 8px;">
+            <a href="https://www.facebook.com/share/19xhD7Yytc/" target="_blank" style="color: var(--accent-cyan, #06b6d4); text-decoration: none; margin: 0 8px;">Facebook</a> •
+            <a href="https://www.instagram.com/ouraidentity?lqvp=aTFpZm05eTFlcnkz" target="_blank" style="color: var(--accent-cyan, #06b6d4); text-decoration: none; margin: 0 8px;">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const logoSec = document.getElementById('sec-logo');
+            const socialSec = document.getElementById('sec-social');
+            const autoSeoSec = document.getElementById('sec-automation-seo');
+
+            if (category === 'all') {
+                logoSec.style.display = 'block';
+                socialSec.style.display = 'block';
+                autoSeoSec.style.display = 'block';
+            } else if (category === 'logo') {
+                logoSec.style.display = 'block';
+                socialSec.style.display = 'none';
+                autoSeoSec.style.display = 'none';
+            } else if (category === 'social') {
+                logoSec.style.display = 'none';
+                socialSec.style.display = 'block';
+                autoSeoSec.style.display = 'none';
+            } else if (category === 'automation-seo') {
+                logoSec.style.display = 'none';
+                socialSec.style.display = 'none';
+                autoSeoSec.style.display = 'block';
+            }
+            searchPortfolio();
+        }
+
+        function searchPortfolio() {
+            const query = document.getElementById('portfolioSearch').value.toLowerCase().trim();
+            document.querySelectorAll('.work-card').forEach(card => {
+                if (card.dataset.missing === "true") return;
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            if (!img) return;
+            const title = card.querySelector('h4').innerText;
+            const desc = card.querySelector('p').innerText;
+
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        function closeLightboxBg(e) {
+            if (e.target.id === 'lightboxModal') closeLightbox();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".work-card img").forEach(function (img) {
+                const rawSrc = img.getAttribute("src");
+                const candidates = [
+                    rawSrc,
+                    encodeURIComponent(rawSrc)
+                ].filter((v, i, a) => a.indexOf(v) === i);
+
+                let idx = 0;
+                img.src = candidates[idx];
+
+                img.onerror = function () {
+                    idx++;
+                    if (idx < candidates.length) {
+                        this.src = candidates[idx];
+                    } else {
+                        const card = this.closest(".work-card");
+                        if (card) {
+                            card.dataset.missing = "true";
+                            card.style.display = "none";
+                        }
+                    }
+                };
+            });
+        });
+    </script>
+</body>
+</html>
