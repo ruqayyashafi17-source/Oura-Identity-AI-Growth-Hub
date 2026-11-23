@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oura Identity | AI Auto Content, Ad Copy & Hashtag Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .generator-wrapper {
+            max-width: 820px;
+            margin: 30px auto;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            background: #020617;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent-cyan, #06b6d4);
+        }
+        .gen-btn {
+            width: 100%;
+            background: var(--accent-cyan, #06b6d4);
+            color: #020617;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.25s ease, transform 0.2s ease;
+        }
+        .gen-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+        }
+        .output-box {
+            display: none;
+            margin-top: 26px;
+            background: #020617;
+            border: 1px solid var(--accent-cyan, #06b6d4);
+            border-radius: 12px;
+            padding: 22px;
+        }
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+        }
+        .output-header h4 {
+            color: var(--accent-cyan, #06b6d4);
+            font-size: 1.05rem;
+        }
+        .copy-btn {
+            background: rgba(6, 182, 212, 0.14);
+            color: var(--accent-cyan, #06b6d4);
+            border: 1px solid rgba(6, 182, 212, 0.45);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background: var(--accent-cyan, #06b6d4);
+            color: #020617;
+        }
+        .generated-text {
+            color: #f8fafc;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            white-space: pre-line;
+            margin-bottom: 14px;
+        }
+        .hashtags-box {
+            background: #0f172a;
+            border: 1px dashed #334155;
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: var(--accent-cyan, #06b6d4);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">OURA <span>IDENTITY</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="ai-audit.html">AI Audit Engine</a>
+            <a href="ai-generator.html" class="active">AI Post Generator</a>
+        </nav>
+    </header>
+
+    <section>
+        <div class="section-title">
+            <h2>AI Auto Content &amp; Hashtag Generator</h2>
+            <p>Instant Social Media Posts, Meta/Google Ad Copy &amp; Targeted Hashtags Powered by Oura Identity</p>
+        </div>
+
+        <div class="generator-wrapper">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="brandName">Brand / Business Name</label>
+                    <input type="text" id="brandName" placeholder="e.g., Oura Identity or Caffè Aura" value="Oura Identity">
+                </div>
+
+                <div class="form-group">
+                    <label for="nicheTopic">Product / Service / Offer</label>
+                    <input type="text" id="nicheTopic" placeholder="e.g., Logo Design, Meta Ads, Coffee" value="Digital Marketing & AI Automation">
+                </div>
+
+                <div class="form-group">
+                    <label for="platformSelect">Platform / Format</label>
+                    <select id="platformSelect">
+                        <option value="smm">Instagram &amp; Facebook Post</option>
+                        <option value="ads">Meta / Google Paid Ad Copy</option>
+                        <option value="linkedin">LinkedIn B2B Post</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="goalSelect">Campaign Goal</label>
+                    <select id="goalSelect">
+                        <option value="leads">Lead Generation &amp; Sales</option>
+                        <option value="awareness">Brand Awareness &amp; Trust</option>
+                        <option value="offer">Limited-Time Promo Offer</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="gen-btn" onclick="generateAutoContent()">⚡ Generate Auto Post, Ad Copy &amp; Hashtags</button>
+
+            <div class="output-box" id="outputBox">
+                <div class="output-header">
+                    <h4>✨ Ready-to-Publish Content</h4>
+                    <button class="copy-btn" id="copyBtn" onclick="copyGeneratedText()">Copy All</button>
+                </div>
+                <div class="generated-text" id="generatedPost"></div>
+                <div class="hashtags-box" id="generatedHashtags"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
+    </footer>
+
+    <script>
+        function generateAutoContent() {
+            const brand = document.getElementById('brandName').value.trim() || 'Oura Identity';
+            const topic = document.getElementById('nicheTopic').value.trim() || 'Digital Growth Solutions';
+            const platform = document.getElementById('platformSelect').value;
+            const goal = document.getElementById('goalSelect').value;
+
+            let postBody = '';
+            let cleanBrandTag = '#' + brand.replace(/[^a-zA-Z0-9]/g, '');
+            let cleanTopicTag = '#' + topic.replace(/[^a-zA-Z0-9]/g, '');
+
+            if (platform === 'ads') {
+                if (goal === 'offer') {
+                    postBody = `🔥 LIMITED-TIME OFFER BY ${brand.toUpperCase()}!\n\nReady to scale your business with ${topic}? Get high-converting results without wasting your ad budget.\n\n✅ Targeted Audience Strategy\n✅ High-Impact Visuals & Copy\n✅ Measurable ROI & Fast Turnaround\n\n👇 Click "Learn More" or DM us today to claim your spot!`;
+                } else {
+                    postBody = `🚀 STRUGGLING TO GET CONSISTENT LEADS?\n\n${brand} helps ambitious businesses grow faster with result-driven ${topic}.\n\n🎯 Precision Targeting\n📈 Proven Conversion Frameworks\n⚡ Smart Automation & Reporting\n\n📩 Message us now for a free strategy consultation!`;
+                }
+            } else if (platform === 'linkedin') {
+                postBody = `Modern businesses don't just need visibility—they need a scalable growth system.\n\nAt ${brand}, we combine strategic ${topic} with streamlined workflows to help brands stand out, attract qualified leads, and convert consistently.\n\nIf you're looking to elevate your digital presence in 2026, let's connect and build something impactful together.`;
+            } else {
+                if (goal === 'offer') {
+                    postBody = `✨ SPECIAL CAMPAIGN ALERT from ${brand}! ✨\n\nUpgrade your brand presence with our ${topic} package—designed to attract more customers and boost engagement.\n\n💡 Standout Visuals\n📲 Consistent Social Media Management\n🚀 Real Business Growth\n\n💬 Comment "GROW" or DM us today to get started!`;
+                } else if (goal === 'awareness') {
+                    postBody = `Beyond Design, We Build Identities. 🌟\n\nAt ${brand}, every post, campaign, and strategy around ${topic} is crafted to build lasting trust with your audience.\n\nFollow us for daily growth tips, brand transformations, and smart marketing strategies!`;
+                } else {
+                    postBody = `Ready to take your brand to the next level? 🚀\n\n${brand} delivers end-to-end ${topic} tailored to turn your audience into loyal clients.\n\n📩 DM us today to book your slot!`;
+                }
+            }
+
+            const hashtags = `${cleanBrandTag} ${cleanTopicTag} #DigitalMarketing #SocialMediaManagement #BrandIdentity #PaidAds #LeadGeneration #ContentStrategy #BusinessGrowth #AIAutomation #MarketingAgency #KarachiBusiness`;
+
+            document.getElementById('generatedPost').innerText = postBody;
+            document.getElementById('generatedHashtags').innerText = hashtags;
+            document.getElementById('outputBox').style.display = 'block';
+            document.getElementById('copyBtn').innerText = 'Copy All';
+        }
+
+        function copyGeneratedText() {
+            const post = document.getElementById('generatedPost').innerText;
+            const tags = document.getElementById('generatedHashtags').innerText;
+            navigator.clipboard.writeText(post + '\n\n' + tags).then(() => {
+                document.getElementById('copyBtn').innerText = 'Copied ✓';
+            });
+        }
+    </script>
+</body>
+</html>
