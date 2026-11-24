@@ -7,23 +7,49 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .generator-wrapper {
-            max-width: 820px;
-            margin: 30px auto;
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            max-width: 840px;
+            margin: 20px auto 0;
+            background: linear-gradient(160deg, var(--charcoal-card, #131f33) 0%, var(--navy-deep, #050c18) 100%);
+            border: 1px solid var(--charcoal-border, #24344d);
+            border-top: 3px solid var(--sky-primary, #38bdf8);
             border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            padding: 30px;
+            box-shadow: 0 18px 40px rgba(5, 12, 24, 0.5);
+        }
+        .generator-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--charcoal-border, #24344d);
+        }
+        .generator-topbar span.agency-kicker {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--sky-primary, #38bdf8);
+        }
+        .generator-topbar span.workflow-badge {
+            background: var(--sky-soft, rgba(56, 189, 248, 0.12));
+            color: var(--sky-primary, #38bdf8);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            padding: 4px 11px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 600;
         }
         .presets-section {
             margin-bottom: 22px;
             padding-bottom: 18px;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--charcoal-border, #24344d);
         }
         .presets-label {
             display: block;
-            color: #94a3b8;
-            font-size: 0.82rem;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -35,24 +61,24 @@
             gap: 10px;
         }
         .preset-btn {
-            background: #020617;
+            background: var(--navy-base, #091426);
             color: #cbd5e1;
-            border: 1px solid #334155;
+            border: 1px solid var(--charcoal-border, #24344d);
             padding: 8px 14px;
             border-radius: 999px;
-            font-size: 0.84rem;
+            font-size: 0.83rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .preset-btn:hover {
-            border-color: var(--accent-cyan, #06b6d4);
+            border-color: var(--sky-primary, #38bdf8);
             color: #f8fafc;
         }
         .preset-btn.active-preset {
-            background: rgba(6, 182, 212, 0.16);
-            border-color: var(--accent-cyan, #06b6d4);
-            color: var(--accent-cyan, #06b6d4);
+            background: var(--sky-soft, rgba(56, 189, 248, 0.14));
+            border-color: var(--sky-primary, #38bdf8);
+            color: var(--sky-primary, #38bdf8);
         }
         .form-grid {
             display: grid;
@@ -62,7 +88,7 @@
         }
         .form-group label {
             display: block;
-            color: #cbd5e1;
+            color: #e2e8f0;
             font-size: 0.88rem;
             margin-bottom: 6px;
             font-weight: 600;
@@ -70,9 +96,9 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            background: #020617;
-            border: 1px solid #334155;
-            color: #f8fafc;
+            background: var(--navy-deep, #050c18);
+            border: 1px solid var(--charcoal-border, #24344d);
+            color: var(--text-primary, #f8fafc);
             padding: 11px 14px;
             border-radius: 10px;
             font-size: 0.92rem;
@@ -80,23 +106,24 @@
         }
         .form-group input:focus,
         .form-group select:focus {
-            border-color: var(--accent-cyan, #06b6d4);
+            border-color: var(--sky-primary, #38bdf8);
         }
         .gen-btn {
             width: 100%;
-            background: var(--accent-cyan, #06b6d4);
-            color: #020617;
+            background: linear-gradient(135deg, var(--sky-primary, #38bdf8) 0%, var(--sky-dark, #0284c7) 100%);
+            color: var(--navy-deep, #050c18);
             border: none;
             padding: 13px 20px;
             border-radius: 10px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: opacity 0.25s ease, transform 0.2s ease;
+            transition: opacity 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
         .gen-btn:hover:not(:disabled) {
-            opacity: 0.92;
+            opacity: 0.95;
             transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(56, 189, 248, 0.26);
         }
         .gen-btn:disabled {
             opacity: 0.65;
@@ -105,7 +132,7 @@
         .status-note {
             margin-top: 12px;
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: var(--text-secondary, #94a3b8);
             text-align: center;
             word-break: break-word;
         }
@@ -118,8 +145,9 @@
         .output-box {
             display: none;
             margin-top: 24px;
-            background: #020617;
-            border: 1px solid var(--accent-cyan, #06b6d4);
+            background: var(--navy-deep, #050c18);
+            border: 1px solid var(--charcoal-border, #24344d);
+            border-left: 4px solid var(--sky-primary, #38bdf8);
             border-radius: 12px;
             padding: 22px;
         }
@@ -128,17 +156,17 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 14px;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--charcoal-border, #24344d);
             padding-bottom: 10px;
         }
         .output-header h4 {
-            color: var(--accent-cyan, #06b6d4);
+            color: var(--sky-primary, #38bdf8);
             font-size: 1.05rem;
         }
         .copy-btn {
-            background: rgba(6, 182, 212, 0.14);
-            color: var(--accent-cyan, #06b6d4);
-            border: 1px solid rgba(6, 182, 212, 0.45);
+            background: var(--sky-soft, rgba(56, 189, 248, 0.14));
+            color: var(--sky-primary, #38bdf8);
+            border: 1px solid rgba(56, 189, 248, 0.45);
             padding: 6px 14px;
             border-radius: 8px;
             font-size: 0.85rem;
@@ -146,22 +174,22 @@
             cursor: pointer;
         }
         .copy-btn:hover {
-            background: var(--accent-cyan, #06b6d4);
-            color: #020617;
+            background: var(--sky-primary, #38bdf8);
+            color: var(--navy-deep, #050c18);
         }
         .generated-text {
-            color: #f8fafc;
+            color: var(--text-primary, #f8fafc);
             font-size: 0.95rem;
             line-height: 1.65;
             white-space: pre-line;
             margin-bottom: 14px;
         }
         .hashtags-box {
-            background: #0f172a;
-            border: 1px dashed #334155;
+            background: var(--charcoal-card, #131f33);
+            border: 1px dashed var(--charcoal-border, #24344d);
             padding: 12px 14px;
             border-radius: 8px;
-            color: var(--accent-cyan, #06b6d4);
+            color: var(--sky-primary, #38bdf8);
             font-size: 0.88rem;
             line-height: 1.5;
         }
@@ -181,11 +209,17 @@
 
     <section>
         <div class="section-title">
+            <div class="agency-eyebrow">Beyond Design, We Build Identities</div>
             <h2>Live AI Post, Ad Copy &amp; Hashtag Generator</h2>
-            <p>Powered Directly by n8n Webhook &amp; AI Workflow</p>
+            <p>Powered Directly by n8n Webhook &amp; AI Automation Workflow</p>
         </div>
 
         <div class="generator-wrapper">
+            <div class="generator-topbar">
+                <span class="agency-kicker">OURA IDENTITY DIGITAL BRAND AGENCY</span>
+                <span class="workflow-badge">n8n Live Webhook</span>
+            </div>
+
             <div class="presets-section">
                 <span class="presets-label">⚡ Quick Agency Campaign Presets (1-Click Auto-Fill)</span>
                 <div class="presets-grid">
@@ -242,12 +276,30 @@
     </section>
 
     <footer>
-        <p>Created by <span>Ruqayya Shafi</span> • Founder, Oura Identity Digital Brand Agency</p>
+        <div>
+            <strong>Oura Identity Digital Brand Agency</strong> — Beyond Design, We Build Identities
+        </div>
+        <div>
+            Founded by <span>Ruqayya Shafi</span>
+        </div>
     </footer>
 
     <script>
         // Live HTTPS Tunnel URL (jab tak localtunnel chal raha hai aur n8n Active hai):
         const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook-test/oura-post-generator';
+
+        // Services page se aane wale ?service=... parameter ko auto-fill karein:
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const incomingService = params.get('service');
+            if (incomingService) {
+                document.getElementById('nicheTopic').value = incomingService;
+                document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active-preset'));
+                const statusNote = document.getElementById('statusNote');
+                statusNote.className = 'status-note';
+                statusNote.innerText = 'Service loaded from Services page! Ab "Generate via Live n8n Workflow" dabayein.';
+            }
+        });
 
         function applyPreset(btnElement, brand, topic, platform, goal) {
             document.getElementById('brandName').value = brand;
