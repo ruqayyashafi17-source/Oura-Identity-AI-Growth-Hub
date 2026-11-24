@@ -196,9 +196,8 @@
     </footer>
 
     <script>
-        // Test URL (jab n8n mein workflow test mode par ho):
-        // Production URL (jab workflow Active ho): http://localhost:5678/webhook/oura-post-generator
-        const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook-test/oura-post-generator';
+        // Live HTTPS Tunnel URL (jab tak localtunnel chal raha hai aur n8n Active hai):
+        const N8N_WEBHOOK_URL = 'https://old-paws-camp.loca.lt/webhook/oura-post-generator';
 
         async function runGenerator() {
             const brand = document.getElementById('brandName').value.trim();
