@@ -68,6 +68,7 @@
             font-size: 0.85rem;
             color: #94a3b8;
             text-align: center;
+            word-break: break-word;
         }
         .status-error {
             color: #f87171;
@@ -176,13 +177,13 @@
                 </div>
             </div>
 
-            <button class="gen-btn" id="genBtn" onclick="generateViaWorkflow()">⚡ Generate via Live n8n Workflow</button>
+            <button type="button" class="gen-btn" id="genBtn" onclick="runGenerator()">⚡ Generate via Live n8n Workflow</button>
             <div class="status-note" id="statusNote">Waiting to connect with n8n webhook.</div>
 
             <div class="output-box" id="outputBox">
                 <div class="output-header">
                     <h4>✨ Live AI Workflow Output</h4>
-                    <button class="copy-btn" id="copyBtn" onclick="copyGeneratedText()">Copy All</button>
+                    <button type="button" class="copy-btn" id="copyBtn" onclick="copyGeneratedText()">Copy All</button>
                 </div>
                 <div class="generated-text" id="generatedPost"></div>
                 <div class="hashtags-box" id="generatedHashtags"></div>
@@ -199,7 +200,7 @@
         // Production URL (jab workflow Active ho): http://localhost:5678/webhook/oura-post-generator
         const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook-test/oura-post-generator';
 
-        async function generateViaWorkflow() {
+        async function runGenerator() {
             const brand = document.getElementById('brandName').value.trim();
             const topic = document.getElementById('nicheTopic').value.trim();
             const platform = document.getElementById('platformSelect').value;
@@ -210,13 +211,7 @@
             const outputBox = document.getElementById('outputBox');
 
             statusNote.className = 'status-note';
-
-            if (!N8N_WEBHOOK_URL || N8N_WEBHOOK_URL === 'YOUR_N8N_WEBHOOK_URL_HERE') {
-                outputBox.style.display = 'none';
-                statusNote.className = 'status-note status-error';
-                statusNote.innerText = 'Error: Real n8n Webhook URL abhi add nahi hui.';
-                return;
-            }
+            statusNote.innerText = 'Step 1: Button click ho gaya! Ab n8n se rabta ho raha hai...';
 
             if (!brand || !topic) {
                 outputBox.style.display = 'none';
@@ -227,7 +222,6 @@
 
             btn.disabled = true;
             btn.innerText = '⏳ Running n8n Workflow...';
-            statusNote.innerText = 'Sending POST request to n8n webhook...';
 
             try {
                 const response = await fetch(N8N_WEBHOOK_URL, {
@@ -236,16 +230,24 @@
                     body: JSON.stringify({ brand, topic, platform, goal })
                 });
 
+                const rawText = await response.text();
+
                 if (!response.ok) {
-                    throw new Error('HTTP Status ' + response.status);
+                    throw new Error('HTTP ' + response.status + ': ' + rawText);
                 }
 
-                const data = await response.json();
+                let data = {};
+                try {
+                    data = JSON.parse(rawText);
+                } catch (e) {
+                    throw new Error('Invalid JSON response: ' + rawText);
+                }
+
                 const postText = data.post || data.content || data.caption || data.output || '';
                 const tagsText = data.hashtags || '';
 
                 if (!postText) {
-                    throw new Error('n8n response mein post/content field nahi mila.');
+                    throw new Error('Response mein post field nahi mila: ' + rawText);
                 }
 
                 document.getElementById('generatedPost').innerText = postText;
@@ -258,7 +260,7 @@
             } catch (err) {
                 outputBox.style.display = 'none';
                 statusNote.className = 'status-note status-error';
-                statusNote.innerText = 'Workflow Error: ' + err.message;
+                statusNote.innerText = 'Step 2 Error: ' + err.message;
             } finally {
                 btn.disabled = false;
                 btn.innerText = '⚡ Generate via Live n8n Workflow';
@@ -273,3 +275,6 @@
                 document.getElementById('copyBtn').innerText = 'Copied ✓';
             });
         }
+    </script>
+</body>
+</html>
