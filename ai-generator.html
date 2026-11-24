@@ -15,6 +15,45 @@
             padding: 28px;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
         }
+        .presets-section {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #1e293b;
+        }
+        .presets-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        .presets-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .preset-btn {
+            background: #020617;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .preset-btn:hover {
+            border-color: var(--accent-cyan, #06b6d4);
+            color: #f8fafc;
+        }
+        .preset-btn.active-preset {
+            background: rgba(6, 182, 212, 0.16);
+            border-color: var(--accent-cyan, #06b6d4);
+            color: var(--accent-cyan, #06b6d4);
+        }
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -147,6 +186,17 @@
         </div>
 
         <div class="generator-wrapper">
+            <div class="presets-section">
+                <span class="presets-label">⚡ Quick Agency Campaign Presets (1-Click Auto-Fill)</span>
+                <div class="presets-grid">
+                    <button type="button" class="preset-btn active-preset" onclick="applyPreset(this, 'Oura Identity', 'Social Media Management & Paid Ads', 'LinkedIn', 'Lead Generation')">🎯 Lead Gen (LinkedIn)</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset(this, 'Oura Identity', 'AI Automation & Workflow Solutions for Businesses', 'LinkedIn', 'Brand Awareness')">🏢 B2B Brand Awareness</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset(this, 'Oura Identity', 'Limited-Time 20% Off Social Media & Ads Growth Package', 'Instagram & Facebook', 'Promo Offer')">🔥 Promo Offer (IG &amp; FB)</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset(this, 'Oura Identity', 'Complete Brand Identity, Logo Design & Visual Guidelines', 'Instagram & Facebook', 'Brand Awareness')">🚀 Brand Launch &amp; Identity</button>
+                    <button type="button" class="preset-btn" onclick="applyPreset(this, 'Oura Identity', 'Google Business Profile Setup & Local SEO Ranking', 'Meta / Google Ads', 'Lead Generation')">📈 SEO &amp; Google Ranking</button>
+                </div>
+            </div>
+
             <div class="form-grid">
                 <div class="form-group">
                     <label for="brandName">Brand / Business Name</label>
@@ -163,14 +213,14 @@
                     <select id="platformSelect">
                         <option value="Instagram & Facebook">Instagram &amp; Facebook</option>
                         <option value="Meta / Google Ads">Meta / Google Ads</option>
-                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="LinkedIn" selected>LinkedIn</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="goalSelect">Goal</label>
                     <select id="goalSelect">
-                        <option value="Lead Generation">Lead Generation</option>
+                        <option value="Lead Generation" selected>Lead Generation</option>
                         <option value="Brand Awareness">Brand Awareness</option>
                         <option value="Promo Offer">Promo Offer</option>
                     </select>
@@ -197,7 +247,21 @@
 
     <script>
         // Live HTTPS Tunnel URL (jab tak localtunnel chal raha hai aur n8n Active hai):
-        const N8N_WEBHOOK_URL = 'http://localhost:5678/webhook-test/oura-post-generator';
+        const N8N_WEBHOOK_URL = 'https://old-paws-camp.loca.lt/webhook/oura-post-generator';
+
+        function applyPreset(btnElement, brand, topic, platform, goal) {
+            document.getElementById('brandName').value = brand;
+            document.getElementById('nicheTopic').value = topic;
+            document.getElementById('platformSelect').value = platform;
+            document.getElementById('goalSelect').value = goal;
+
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active-preset'));
+            btnElement.classList.add('active-preset');
+
+            const statusNote = document.getElementById('statusNote');
+            statusNote.className = 'status-note';
+            statusNote.innerText = 'Preset loaded! Ab "Generate via Live n8n Workflow" dabayein.';
+        }
 
         async function runGenerator() {
             const brand = document.getElementById('brandName').value.trim();
