@@ -236,9 +236,11 @@
                     throw new Error('HTTP ' + response.status + ': ' + rawText);
                 }
 
+                const cleanText = rawText.trim().replace(/^=+/, '').trim();
+
                 let data = {};
                 try {
-                    data = JSON.parse(rawText);
+                    data = JSON.parse(cleanText);
                 } catch (e) {
                     throw new Error('Invalid JSON response: ' + rawText);
                 }
