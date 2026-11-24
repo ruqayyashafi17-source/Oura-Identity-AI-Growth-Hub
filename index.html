@@ -5,6 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oura Identity | Digital Brand &amp; AI Automation Agency</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .panel-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .panel-tab-btn {
+            flex: 1;
+            min-width: 100px;
+            background: var(--navy-base);
+            color: var(--text-secondary);
+            border: 1px solid var(--charcoal-border);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .panel-tab-btn:hover {
+            border-color: var(--sky-primary);
+            color: var(--text-primary);
+        }
+
+        .panel-tab-btn.active-tab {
+            background: var(--sky-soft);
+            border-color: var(--sky-primary);
+            color: var(--sky-primary);
+        }
+
+        .goal-finder-box {
+            background: linear-gradient(155deg, var(--charcoal-card) 0%, var(--navy-deep) 100%);
+            border: 1px solid var(--charcoal-border);
+            border-top: 3px solid var(--sky-primary);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 10px;
+        }
+
+        .goal-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0 22px;
+        }
+
+        .goal-pill-btn {
+            background: var(--navy-base);
+            color: var(--text-primary);
+            border: 1px solid var(--charcoal-border);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .goal-pill-btn:hover {
+            border-color: var(--sky-primary);
+            color: var(--sky-primary);
+        }
+
+        .goal-pill-btn.active-goal {
+            background: var(--sky-soft);
+            border-color: var(--sky-primary);
+            color: var(--sky-primary);
+        }
+
+        .goal-result-card {
+            background: var(--navy-base);
+            border: 1px solid var(--charcoal-border);
+            border-left: 4px solid var(--sky-primary);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .goal-result-info {
+            max-width: 620px;
+        }
+
+        .goal-result-info span {
+            display: inline-block;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--sky-primary);
+            margin-bottom: 6px;
+        }
+
+        .goal-result-info h3 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .goal-result-info p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,52 +134,91 @@
             <h1>Brand Identity, Performance Marketing &amp; <span>AI Workflows</span></h1>
             <p>
                 We help businesses build memorable brand identities, scale customer acquisition with
-                targeted campaigns and SEO, and automate repetitive marketing workflows using AI.
+                targeted Meta &amp; Google Ads, SEO, and automate content and lead workflows using n8n &amp; AI.
             </p>
             <div class="hero-actions">
-                <a href="ai-generator.html" class="btn">Launch AI Post Generator</a>
-                <a href="services.html" class="btn-outline">Explore Agency Services</a>
+                <a href="ai-generator.html" class="btn">⚡ Launch AI Post Generator</a>
+                <a href="services.html" class="btn-outline">Explore Interactive Services</a>
             </div>
             <div class="hero-metrics">
                 <div class="metric-item">
-                    <strong>Brand + Growth</strong>
-                    <span>Identity, Ads, SEO &amp; Content</span>
+                    <strong>10+ Services</strong>
+                    <span>Branding, Ads, SEO &amp; Web</span>
                 </div>
                 <div class="metric-item">
                     <strong>n8n + AI</strong>
-                    <span>Automated Campaign Workflows</span>
+                    <span>Live Webhook Automations</span>
                 </div>
                 <div class="metric-item">
-                    <strong>Agency-Ready</strong>
-                    <span>Structured Client Deliverables</span>
+                    <strong>Full-Stack</strong>
+                    <span>Strategy to Execution</span>
                 </div>
             </div>
         </div>
 
         <aside class="hero-panel">
             <div class="panel-header">
-                <h3>Agency Growth &amp; Automation Stack</h3>
-                <span class="panel-tag">LIVE SUITE</span>
+                <h3>Interactive Agency Stack</h3>
+                <span class="panel-tag" id="panelBadge">AI ENGINE</span>
             </div>
-            <ul class="panel-list">
+
+            <div class="panel-tabs">
+                <button type="button" class="panel-tab-btn active-tab" onclick="switchStack('ai', this)">AI Automation</button>
+                <button type="button" class="panel-tab-btn" onclick="switchStack('growth', this)">Ads &amp; SEO</button>
+                <button type="button" class="panel-tab-btn" onclick="switchStack('brand', this)">Brand Studio</button>
+            </div>
+
+            <ul class="panel-list" id="panelList">
                 <li>
-                    <strong>Brand Identity &amp; Creative Studio</strong>
-                    <span>Logo systems, brand guidelines, campaign visuals, and high-retention short videos.</span>
+                    <strong>n8n Webhook &amp; AI Copy Engine</strong>
+                    <span>Instant platform-specific social media posts, ad copies, and hashtags via live API.</span>
                 </li>
                 <li>
-                    <strong>Paid Acquisition &amp; Search Visibility</strong>
-                    <span>Meta &amp; Google Ads management, local SEO, Google Business Profile, and lead funnels.</span>
+                    <strong>Automated Brand &amp; Growth Audit</strong>
+                    <span>Diagnostic scoring and actionable recommendations across digital channels.</span>
                 </li>
                 <li>
-                    <strong>Automated Content &amp; Lead Engine</strong>
-                    <span>n8n-powered post generation, structured JSON outputs, and automated outreach pipelines.</span>
+                    <strong>B2B Lead &amp; Email Pipelines</strong>
+                    <span>Structured data extraction and automated outreach workflows built for speed.</span>
                 </li>
             </ul>
-            <a href="ai-audit.html" class="btn full-btn">Run Brand &amp; Growth Audit</a>
+
+            <a href="ai-generator.html" class="btn full-btn" id="panelActionBtn">Open Live AI Post Generator</a>
         </aside>
     </div>
 
     <section>
+        <div class="section-header-row">
+            <div>
+                <h2>Find Your Growth Solution</h2>
+                <p>Select your primary business goal to get a recommended agency stack and launch directly.</p>
+            </div>
+            <a href="services.html" class="btn-outline">Build Custom Scope</a>
+        </div>
+
+        <div class="goal-finder-box">
+            <div class="goal-pills">
+                <button type="button" class="goal-pill-btn active-goal" onclick="selectGoal('leads', this)">🎯 Generate More Leads</button>
+                <button type="button" class="goal-pill-btn" onclick="selectGoal('brand', this)">🚀 Launch / Rebrand Identity</button>
+                <button type="button" class="goal-pill-btn" onclick="selectGoal('automation', this)">⚡ Automate Content &amp; Workflows</button>
+                <button type="button" class="goal-pill-btn" onclick="selectGoal('seo', this)">📈 Rank on Google &amp; AI Search</button>
+            </div>
+
+            <div class="goal-result-card">
+                <div class="goal-result-info">
+                    <span id="goalTag">RECOMMENDED STACK • PAID ACQUISITION</span>
+                    <h3 id="goalTitle">Meta &amp; Google Ads + High-Converting Ad Copy</h3>
+                    <p id="goalDesc">Targeted Facebook, Instagram, and Google Search campaigns paired with persuasive ad copywriting and lead capture funnels.</p>
+                </div>
+                <div class="hero-actions" style="margin-bottom: 0;">
+                    <a href="ai-generator.html?service=Meta%20%26%20Google%20Ads%20Lead%20Generation" class="btn" id="goalPrimaryBtn">⚡ Generate Campaign Copy</a>
+                    <a href="services.html" class="btn-outline">View All Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt">
         <div class="section-header-row">
             <div>
                 <h2>Core Agency Capabilities</h2>
@@ -80,54 +229,24 @@
 
         <div class="grid">
             <div class="card">
-                <span class="card-num">01</span>
-                <h3>Brand Identity &amp; Positioning</h3>
-                <p>Cohesive visual identity, brand voice, logos, and digital assets that establish trust from day one.</p>
+                <span class="card-num">01 • BRANDING</span>
+                <h3>Brand Identity &amp; Design</h3>
+                <p>Logo design, brand naming, slogans, social media graphics, and promotional videos that build instant trust.</p>
             </div>
             <div class="card">
-                <span class="card-num">02</span>
-                <h3>Paid Ads &amp; Social Growth</h3>
-                <p>Campaign setup, audience targeting, and social media management built for leads and measurable reach.</p>
+                <span class="card-num">02 • PAID GROWTH</span>
+                <h3>Meta &amp; Google Ads</h3>
+                <p>Data-backed Facebook, Instagram, and Google Search campaigns structured for qualified leads and ROI.</p>
             </div>
             <div class="card">
-                <span class="card-num">03</span>
-                <h3>SEO &amp; Search Presence</h3>
-                <p>On-page optimization, off-page authority building, and search visibility for sustainable organic discovery.</p>
+                <span class="card-num">03 • SEARCH &amp; LOCAL</span>
+                <h3>SEO, GEO &amp; Google Profile</h3>
+                <p>On-page SEO, off-page authority backlinks, Generative Engine Optimization, and local map ranking.</p>
             </div>
             <div class="card">
-                <span class="card-num">04</span>
-                <h3>AI &amp; Workflow Automation</h3>
-                <p>Custom n8n automations, AI content assistants, and lead extraction workflows that save team hours.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-alt">
-        <div class="section-title">
-            <h2>How We Deliver</h2>
-            <p>A clear, repeatable operating model from discovery to automated execution.</p>
-        </div>
-
-        <div class="process-grid">
-            <div class="process-step">
-                <span>Step 01</span>
-                <h3>Audit &amp; Direction</h3>
-                <p>Review brand positioning, target audience, platform goals, and current marketing bottlenecks.</p>
-            </div>
-            <div class="process-step">
-                <span>Step 02</span>
-                <h3>Identity &amp; Copy</h3>
-                <p>Craft sharp messaging, campaign angles, visuals, and platform-specific creative assets.</p>
-            </div>
-            <div class="process-step">
-                <span>Step 03</span>
-                <h3>Automation &amp; Launch</h3>
-                <p>Connect AI workflows and live campaigns so content and leads move faster with less manual effort.</p>
-            </div>
-            <div class="process-step">
-                <span>Step 04</span>
-                <h3>Refine &amp; Scale</h3>
-                <p>Track performance, sharpen targeting, and expand winning campaigns across channels.</p>
+                <span class="card-num">04 • AUTOMATION</span>
+                <h3>Websites &amp; n8n AI Workflows</h3>
+                <p>Responsive agency websites integrated with live n8n webhooks, AI content tools, and automated pipelines.</p>
             </div>
         </div>
     </section>
@@ -140,5 +259,108 @@
             Founded by <span>Ruqayya Shafi</span>
         </div>
     </footer>
+
+    <script>
+        const stackData = {
+            ai: {
+                badge: 'AI ENGINE',
+                items: [
+                    { title: 'n8n Webhook & AI Copy Engine', desc: 'Instant platform-specific social media posts, ad copies, and hashtags via live API.' },
+                    { title: 'Automated Brand & Growth Audit', desc: 'Diagnostic scoring and actionable recommendations across digital channels.' },
+                    { title: 'B2B Lead & Email Pipelines', desc: 'Structured data extraction and automated outreach workflows built for speed.' }
+                ],
+                btnText: 'Open Live AI Post Generator',
+                btnLink: 'ai-generator.html'
+            },
+            growth: {
+                badge: 'GROWTH STACK',
+                items: [
+                    { title: 'Meta & Google Ads Management', desc: 'High-intent search and social campaigns built for measurable leads and conversions.' },
+                    { title: 'SEO & GEO Search Authority', desc: 'On-page optimization, off-page backlinks, and AI search visibility.' },
+                    { title: 'Google Business Profile Setup', desc: 'Complete local map optimization to capture nearby high-intent customers.' }
+                ],
+                btnText: 'Run Brand & Growth Audit',
+                btnLink: 'ai-audit.html'
+            },
+            brand: {
+                badge: 'BRAND STUDIO',
+                items: [
+                    { title: 'Brand Identity & Logo Systems', desc: 'Custom logos, brand naming, taglines, and cohesive visual guidelines.' },
+                    { title: 'Social Media Management', desc: 'Monthly content calendars, profile optimization, and consistent publishing.' },
+                    { title: 'Posts, Reels & Promo Videos', desc: 'High-retention visual storytelling designed for Instagram, Facebook, and LinkedIn.' }
+                ],
+                btnText: 'Explore All 10 Agency Services',
+                btnLink: 'services.html'
+            }
+        };
+
+        function switchStack(key, btnEl) {
+            const data = stackData[key];
+            if (!data) return;
+
+            document.querySelectorAll('.panel-tab-btn').forEach(b => b.classList.remove('active-tab'));
+            btnEl.classList.add('active-tab');
+
+            document.getElementById('panelBadge').innerText = data.badge;
+            const listEl = document.getElementById('panelList');
+            listEl.innerHTML = data.items.map(item => `
+                <li>
+                    <strong>${item.title}</strong>
+                    <span>${item.desc}</span>
+                </li>
+            `).join('');
+
+            const actionBtn = document.getElementById('panelActionBtn');
+            actionBtn.innerText = data.btnText;
+            actionBtn.href = data.btnLink;
+        }
+
+        const goalData = {
+            leads: {
+                tag: 'RECOMMENDED STACK • PAID ACQUISITION',
+                title: 'Meta & Google Ads + High-Converting Ad Copy',
+                desc: 'Targeted Facebook, Instagram, and Google Search campaigns paired with persuasive ad copywriting and lead capture funnels.',
+                btnText: '⚡ Generate Campaign Copy',
+                btnLink: 'ai-generator.html?service=Meta%20%26%20Google%20Ads%20Lead%20Generation'
+            },
+            brand: {
+                tag: 'RECOMMENDED STACK • BRAND IDENTITY',
+                title: 'Logo Design, Brand Naming & Social Media Kit',
+                desc: 'Build a complete visual identity with custom logo systems, taglines, social media templates, and launch content.',
+                btnText: '⚡ Generate Launch Post',
+                btnLink: 'ai-generator.html?service=Complete%20Brand%20Identity%20%26%20Logo%20Launch'
+            },
+            automation: {
+                tag: 'RECOMMENDED STACK • AI WORKFLOWS',
+                title: 'n8n AI Content Engine & Automated Lead Workflows',
+                desc: 'Connect webhooks, AI agents, and automated content pipelines so your marketing runs faster with minimal manual work.',
+                btnText: '⚡ Test Live AI Workflow',
+                btnLink: 'ai-generator.html?service=n8n%20%26%20AI%20Workflow%20Automation'
+            },
+            seo: {
+                tag: 'RECOMMENDED STACK • ORGANIC & LOCAL',
+                title: 'SEO, GEO Optimization & Google Business Profile',
+                desc: 'Improve Google rankings, build off-page backlinks, and optimize your local business profile for consistent organic discovery.',
+                btnText: '⚡ Generate SEO Post',
+                btnLink: 'ai-generator.html?service=SEO%2C%20GEO%20%26%20Google%20Business%20Profile%20Growth'
+            }
+        };
+
+        function selectGoal(key, btnEl) {
+            const data = goalData[key];
+            if (!data) return;
+
+            document.querySelectorAll('.goal-pill-btn').forEach(b => b.classList.remove('active-goal'));
+            btnEl.classList.add('active-goal');
+
+            document.getElementById('goalTag').innerText = data.tag;
+            document.getElementById('goalTitle').innerText = data.title;
+            document.getElementById('goalDesc').innerText = data.desc;
+
+            const primaryBtn = document.getElementById('goalPrimaryBtn');
+            primaryBtn.innerText = data.btnText;
+            primaryBtn.href = data.btnLink;
+        }
+    </script>
 </body>
 </html>
